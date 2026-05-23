@@ -1,144 +1,68 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// prisma/schema.prisma
 
 generator client {
-  provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  provider = "prisma-client-js"
 }
 
+// ─── CONFIGURACIÓN CORREGIDA PARA PRISMA 7+ ───────────────────
 datasource db {
   provider = "postgresql"
+  // Las URL de conexión se omiten aquí porque las inyecta prisma.config.ts
 }
 
-enum Enum_Role {
+// ─── Enum de roles (ADMIN y USER) ─────────────────────────────
+enum Role {
   ADMIN
   USER
 }
 
-enum Enum_OrderStatus {
-  PENDING
-  PAID
-  SHIPPED
-  DELIVERED
-  CANCELED
+// ─── Enum de tipo de movimiento ───────────────────────────────
+enum MovementType {
+  ENTRADA
+  SALIDA
 }
 
-enum Enum_PaymentMethod {
-  CREDIT_CARD
-  DEBIT_CARD
-  PAYPAL
-  CASH
-}
-enum Enum_PaymentStatus {
-  PENDING
-  COMPLETED
-  FAILED
-  REFUNDED
-}
-
+// ─── Modelo de Usuario ────────────────────────────────────────
 model User {
-  id    String @id @default(cuid())
-  name  String
-  email String @unique
-  image String?
-  deleted Boolean @default(false)
-  enabled Boolean @default(true)
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  image     String?  // URL de foto/avatar (Requisito del PDF para el Sidebar)
+  role      Role     @default(USER)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  perfil Perfil?
-  role Enum_Role @default(USER)
+
+  // Relaciones
+  maestrosCreados     Maestro[]    @relation("CreadorMaestro")
+  movimientosEjecutados Movimiento[] @relation("ResponsableMovimiento")
 }
 
-model Perfil {
-  id String @id @default(cuid())
-  lastName String
-  address String
-  phone String
+// ─── Modelo de Maestro (Libro / Material) ────────────────────
+model Maestro {
+  id        String   @id @default(cuid())
+  nombre    String
+  saldo     Int      @default(0) // Saldo actual de inventario
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId String @unique
-  user User @relation(fields: [userId], references: [id])
+
+  // Relación con el usuario (ADMIN) que lo creó
+  creadoPorId String
+  creadoPor   User     @relation("CreadorMaestro", fields: [creadoPorId], references: [id])
+
+  // Relaciones
+  movimientos Movimiento[]
 }
 
-model Customer {
-  id String @id @default(cuid())
-  name String
-  email String @unique
-  phone String
-  address String
-  deleted Boolean @default(false)
-  enabled Boolean @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  orders Order[]
-}
+// ─── Modelo de Movimiento / Transacción ──────────────────────
+model Movimiento {
+  id        String       @id @default(cuid())
+  fecha     DateTime     @default(now())
+  tipo      MovementType // ENTRADA o SALIDA
+  cantidad  Int          // Cantidad de elementos que salen o entran
 
-model Supplier {
-  id String @id @default(cuid())
-  name String
-  email String @unique
-  phone String
-  address String
-  deleted Boolean @default(false)
-  enabled Boolean @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  products Product[]
-}
+  // Relación con el Maestro al que pertenece
+  maestroId String
+  maestro   Maestro      @relation(fields: [maestroId], references: [id])
 
-model Product {
-  id String @id @default(cuid())
-  name String
-  description String
-  price Float
-  stock Int
-  deleted Boolean @default(false)
-  enabled Boolean @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  suppliers Supplier[]
-  orderItems OrderItem[]
-}
-
-model Order {
-  id String @id @default(cuid())
-  orderDate DateTime @default(now())
-  subTotalAmount Float
-  texAmount Float
-  totalAmount Float
-  status  Enum_OrderStatus @default(PENDING)
-  deleted Boolean @default(false)
-  enabled Boolean @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  customerId String
-  customer Customer @relation(fields: [customerId], references: [id])
-  orderItems OrderItem[]
-  payment Payment[]
-}
-
-model OrderItem {
-  id String @id @default(cuid())
-  quantity Int
-  price Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  productId String
-  product Product @relation(fields: [productId], references: [id])
-  orderId String
-  order Order @relation(fields: [orderId], references: [id])
-}
-
-model Payment {
-  id String @id @default(cuid())
-  paymentDate DateTime @default(now())
-  amount Float
-  method  Enum_PaymentMethod
-  status  Enum_PaymentStatus @default(PENDING)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  orderId String
-  order Order @relation(fields: [orderId], references: [id])
+  // Relación con el usuario en sesión responsable del movimiento
+  responsableId String
+  responsable   User     @relation("ResponsableMovimiento", fields: [responsableId], references: [id])
 }
