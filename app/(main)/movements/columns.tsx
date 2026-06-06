@@ -6,7 +6,6 @@ import { ColumnDef } from '@tanstack/react-table';
 // You can use a Zod schema here if you want.
 export type Movement = {
   id: string;
-
   materialName: string;
 
   // Usuario que realizó el movimiento
@@ -17,9 +16,8 @@ export type Movement = {
 
   // Fechas
   movementDate: Date;
-  dueDate?: Date;
+  dueDate: Date;
   returnedAt?: Date;
-
   status: 'PENDING' | 'COMPLETED' | 'LATE';
 
   // Observaciones
@@ -28,9 +26,11 @@ export type Movement = {
 
 export const columns: ColumnDef<Movement>[] = [
   {accessorKey: 'materialName', header: 'Material',},
-  {accessorKey: 'userName',header: 'User',},
-  {accessorKey: 'type', header: 'Type',},
-  {accessorKey: 'movementDate', header: 'Movement Date',},
-  {accessorKey: 'dueDate', header: 'Due Date',},
-  {accessorKey: 'status', header: 'Status',},
+  {accessorKey: 'userName',header: 'Usuadio',},
+  {accessorKey: 'type', header: 'Tipo de movimiento',},
+  {accessorKey: 'movementDate', header: 'Fecha de movimiento',},
+  {accessorKey: 'dueDate', header: 'Fecha de vencimiento',},
+  {accessorKey: 'returnedAt', header: 'Fecha devuelto',},
+  {accessorKey: 'status', header: 'Estado',},
+  {accessorKey: 'notes', header: 'Notas',},
 ];
