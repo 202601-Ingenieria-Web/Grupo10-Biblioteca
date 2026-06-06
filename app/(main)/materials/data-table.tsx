@@ -59,7 +59,7 @@ export function DataTable<Material, TValue>({ columns, data }: DataTableProps<Ma
                 <TableCell className='justify-center items-center text-center'>
                   <div className='flex flex-row gap-2 justify-center'>
                     <Button variant='outline' size='icon'>
-                      <Link href={`/users/create/${row.id}`}>
+                      <Link href={`/materials/create/${row.id}`}>
                         <Pencil />
                       </Link>
                     </Button>
