@@ -1,5 +1,5 @@
 'use client';
-import { User } from './columns';
+import { Movement } from './columns';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Table,
@@ -17,10 +17,10 @@ import Delete from '@/components/delete-dialog/Index';
 
 interface DataTableProps<TData, TValue> {
   columns: any;
-  data: User[];
+  data: Movement[];
 }
 
-export function DataTable<User, TValue>({ columns, data }: DataTableProps<User, TValue>) {
+export function DataTable<Movement, TValue>({ columns, data }: DataTableProps<Movement, TValue>) {
   return (
     <div className='overflow-hidden rounded-md border'>
       <Table>
@@ -59,7 +59,7 @@ export function DataTable<User, TValue>({ columns, data }: DataTableProps<User, 
                 <TableCell className='justify-center items-center text-center'>
                   <div className='flex flex-row gap-2 justify-center'>
                     <Button variant='outline' size='icon'>
-                      <Link href={`/users/create/${row.id}`}>
+                      <Link href={`/movements/create/${row.id}`}>
                         <Pencil />
                       </Link>
                     </Button>
