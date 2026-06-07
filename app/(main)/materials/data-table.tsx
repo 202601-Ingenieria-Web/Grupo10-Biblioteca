@@ -14,6 +14,7 @@ import { Pencil, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Delete from '@/components/delete-dialog/Index';
+import { StatusBadge } from "@/components/materials/status-badge";
 
 interface DataTableProps<TData, TValue> {
   columns: any;
@@ -45,15 +46,12 @@ export function DataTable<Material, TValue>({ columns, data }: DataTableProps<Ma
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </TableCell>
-                <TableCell className='text-center'>{row.name}</TableCell>
-                <TableCell className='text-center'>{row.role}</TableCell>
-                <TableCell className='text-center'>{row.email}</TableCell>
+                <TableCell className='text-center'>{row.title}</TableCell>
+                <TableCell className='text-center'>{row.author}</TableCell>
+                <TableCell className='text-center'>{row.description}</TableCell>
                 <TableCell className='justify-center items-center text-center'>
                   <div>
-                    <Checkbox
-                      className='justify-center items-center text-center'
-                      checked={row.enabled}
-                    />
+                    <StatusBadge status={row.status} />
                   </div>
                 </TableCell>
                 <TableCell className='justify-center items-center text-center'>
