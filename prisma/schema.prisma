@@ -33,7 +33,7 @@ model User {
 
   // Relaciones
   maestrosCreados     Maestro[]    @relation("CreadorMaestro")
-  movimientosEjecutados Movimiento[] @relation("ResponsableMovimiento")
+  movimientosEjecutados Movement[] @relation("ResponsableMovimiento")
 }
 
 // ─── Modelo de Maestro (Libro / Material) ────────────────────
@@ -48,11 +48,11 @@ model Maestro {
   creadoPor   User     @relation("CreadorMaestro", fields: [creadoPorId], references: [id])
 
   // Relaciones
-  movimientos Movimiento[]
+  movimientos Movement[]
 }
 
 // ─── Modelo de Movimiento / Transacción ──────────────────────
-model Movimiento {
+model Movement {
   id        String       @id @default(cuid())
   fecha     DateTime     @default(now())
   tipo      MovementType // ENTRADA o SALIDA

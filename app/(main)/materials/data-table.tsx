@@ -1,5 +1,5 @@
 'use client';
-import { Material } from './columns';
+import { Material } from "@/types/material";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Table,
@@ -61,7 +61,7 @@ export function DataTable<Material, TValue>({ columns, data }: DataTableProps<Ma
                         <Pencil />
                       </Link>
                     </Button>
-                    <Delete id={row.id} name={row.name} />
+                    <Delete id={row.id} name={row.title} />
                   </div>
                 </TableCell>
               </TableRow>
