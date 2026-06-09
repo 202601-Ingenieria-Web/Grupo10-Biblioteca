@@ -6,14 +6,14 @@ import Link from 'next/link';
 async function getData(): Promise<User[]> {
   const response = await fetch('http://localhost:3000/api/users');
 
-/*   const data = await response.json();
-  return data.users; */
+  const data = await response.json();
+  return data.users;
 
-  console.log('Status:', response.status);
+/*   console.log('Status:', response.status);
   const text = await response.text();
   console.log(text);
 
-  return [];
+  return []; */
 }
 
 export default async function DemoPage() {
