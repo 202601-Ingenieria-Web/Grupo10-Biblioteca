@@ -24,7 +24,7 @@ export default async function DemoPage() {
       <div className='flex flex-row justify-around my-10 '>
         <div>
           <h2 className='text-2xl font-bold tracking-tight'>Users</h2>
-          <p className='text-muted-foreground'>Manage your users here.</p>
+          <p className='text-muted-foreground'>Gestiona los usuarios aquí.</p>
         </div>
         <Link href='/users/create'>
           <Button className='ml-auto'>Create User</Button>

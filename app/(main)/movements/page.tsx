@@ -19,7 +19,7 @@ export default async function DemoPage() {
       <div className='flex flex-row justify-around my-10 '>
         <div>
           <h2 className='text-2xl font-bold tracking-tight'>Movements</h2>
-          <p className='text-muted-foreground'>Manage your movements here.</p>
+          <p className='text-muted-foreground'>Maneja los movimientos aquí.</p>
         </div>
         <Link href='/movements/create'>
           <Button className='ml-auto'>Create Movement</Button>
