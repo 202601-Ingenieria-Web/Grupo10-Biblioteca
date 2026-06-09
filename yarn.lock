@@ -735,7 +735,7 @@
   resolved "https://registry.npmjs.org/@panva/hkdf/-/hkdf-1.2.1.tgz"
   integrity sha512-6oclG6Y3PiDFcoyk8srjLfVKyMfVCKJ27JwNPViuXziFpmdz+MZnZN/aKY0JGXgYuO/VghU0jcOAZgWXZ1Dmrw==
 
-"@prisma/adapter-pg@^7.7.0":
+"@prisma/adapter-pg@^7.8.0":
   version "7.8.0"
   resolved "https://registry.npmjs.org/@prisma/adapter-pg/-/adapter-pg-7.8.0.tgz"
   integrity sha512-ygb3UkerK3v8MDpXVgCISdRNDozpxh6+JVJgiIGbSr5KBgz10LLf5ejUskPGoXlsIjxsOu6nuy1JVQr2EKGSlg==
@@ -4985,7 +4985,7 @@ pg-types@^2.2.0, pg-types@2.2.0:
     postgres-date "~1.0.4"
     postgres-interval "^1.1.0"
 
-pg@^8.16.3, pg@^8.20.0, pg@>=8.0:
+pg@^8.16.3, pg@^8.21.0, pg@>=8.0:
   version "8.21.0"
   resolved "https://registry.npmjs.org/pg/-/pg-8.21.0.tgz"
   integrity sha512-AUP1EYJuHraQGsVoCQVIcM7TEJVGtDzxWtGFZd8rds9d+CCXlU5Js1rYgfLNvxy9iJrpHjGrRjoi/3BT9fRyiA==
