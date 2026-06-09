@@ -1,11 +1,11 @@
-import { columns, User } from './columns';
+import { columns} from './columns';
+import { User } from '@/types/user';
 import { DataTable } from './data-table';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 async function getData(): Promise<User[]> {
   const response = await fetch('http://localhost:3000/api/users');
-
   const data = await response.json();
   return data.users;
 

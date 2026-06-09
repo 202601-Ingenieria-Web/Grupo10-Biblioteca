@@ -40,7 +40,7 @@ export function DataTable<Movement, TValue>({ columns, data }: DataTableProps<Mo
                 <TableCell className='justify-center items-center text-center'>
                   <Avatar>
                     <AvatarImage
-                      src={row.image || 'https://avatars.githubusercontent.com/u/9919?s=200&v=4'}
+                      //src={row.image || 'https://avatars.githubusercontent.com/u/9919?s=200&v=4'}
                     />
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
@@ -49,39 +49,10 @@ export function DataTable<Movement, TValue>({ columns, data }: DataTableProps<Mo
                 <TableCell className='text-center'>{row.userName}</TableCell>
                 <TableCell className='text-center'>{row.userID}</TableCell>
                 <TableCell className='text-center'>{row.type}</TableCell>
-                <TableCell className='text-center'>{row.movementDate}</TableCell>
-                <TableCell className='text-center'>{row.dueDate}</TableCell>
-                <TableCell className='text-center'>{row.returnedAt}</TableCell>
+                <TableCell className='text-center'>{row.movementDate instanceof Date ? row.movementDate.toLocaleDateString() : row.movementDate}</TableCell>
+                <TableCell className='text-center'>{row.dueDate instanceof Date ? row.dueDate.toLocaleDateString() : row.dueDate}</TableCell>
+                <TableCell className='text-center'>{row.returnedAt instanceof Date ? row.returnedAt.toLocaleDateString() : row.returnedAt}</TableCell>
                 <TableCell className='text-center'>{row.status}</TableCell>
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className='h-24 text-center'>
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </div>
-  );
-}
-
-                      checked={row.enabled}
-                    />
-                  </div>
-                </TableCell>
-                <TableCell className='justify-center items-center text-center'>
-                  <div className='flex flex-row gap-2 justify-center'>
-                    <Button variant='outline' size='icon'>
-                      <Link href={`/movements/create/${row.id}`}>
-                        <Pencil />
-                      </Link>
-                    </Button>
-                    <Delete id={row.id} name={row.name} />
-                  </div>
-                </TableCell>
               </TableRow>
             ))
           ) : (
