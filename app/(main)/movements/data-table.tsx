@@ -1,5 +1,5 @@
 'use client';
-import { Movement } from './columns';
+import { Movement } from '@/types/movement';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Table,
@@ -45,13 +45,29 @@ export function DataTable<Movement, TValue>({ columns, data }: DataTableProps<Mo
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </TableCell>
-                <TableCell className='text-center'>{row.name}</TableCell>
-                <TableCell className='text-center'>{row.role}</TableCell>
-                <TableCell className='text-center'>{row.email}</TableCell>
-                <TableCell className='justify-center items-center text-center'>
-                  <div>
-                    <Checkbox
-                      className='justify-center items-center text-center'
+                <TableCell className='text-center'>{row.bookTitle}</TableCell>
+                <TableCell className='text-center'>{row.userName}</TableCell>
+                <TableCell className='text-center'>{row.userID}</TableCell>
+                <TableCell className='text-center'>{row.type}</TableCell>
+                <TableCell className='text-center'>{row.movementDate}</TableCell>
+                <TableCell className='text-center'>{row.dueDate}</TableCell>
+                <TableCell className='text-center'>{row.returnedAt}</TableCell>
+                <TableCell className='text-center'>{row.status}</TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={columns.length} className='h-24 text-center'>
+                No results.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}
+
                       checked={row.enabled}
                     />
                   </div>

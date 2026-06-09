@@ -9,6 +9,7 @@ import { Movement } from '@/types/movement';
 export const columns: ColumnDef<Movement>[] = [
   {accessorKey: 'bookTitle', header: 'Libro',},
   {accessorKey: 'userName',header: 'Usuario',},
+  {accessorKey: 'userID', header: 'ID de Usuario',},
   {accessorKey: 'type', header: 'Tipo de movimiento',},
   {accessorKey: 'movementDate', header: 'Fecha de movimiento',},
   {accessorKey: 'dueDate', header: 'Fecha de vencimiento',},

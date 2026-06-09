@@ -3,6 +3,7 @@ export type Movement = {
   bookTitle: string;
   // Usuario que realizó el movimiento
   userName: string;
+  userID: string;
   // Tipo de movimiento
   type: 'BORROW' | 'RETURN' | 'RESERVATION';
   // Fechas
