@@ -4,7 +4,6 @@ export type Book = {
   author: string;
   isbn: string;
   publicationYear: number;
-  // Estado
   status: "AVAILABLE" | "BORROWED" | "RESERVED" | "LOST" | "DAMAGED";
   image?: string;
 };

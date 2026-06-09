@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 async function getData() {
   const response = await fetch(
-    'http://localhost:3000/api/material',
+    'http://localhost:3000/api/books',
     {
       cache: 'no-store',
     }
@@ -13,36 +13,24 @@ async function getData() {
 
   const data = await response.json();
 
-  return data.maestros;
+  return data.libros;
 }
 
-export default async function MaestrosPage() {
+export default async function BooksPage() {
   const data = await getData();
 
   return (
     <div className='container mx-auto py-10'>
       <div className='flex justify-between items-center mb-10'>
         <div>
-          <h2 className='text-2xl font-bold tracking-tight'>
-            Gestión de Libros
-          </h2>
-
-          <p className='text-muted-foreground'>
-            Administra los libros de la biblioteca.
-          </p>
+          <h2 className='text-2xl font-bold tracking-tight'>Gestión de Libros</h2>
+          <p className='text-muted-foreground'>Administra los libros de la biblioteca.</p>
         </div>
-
-        <Link href='/maestros/create'>
-          <Button>
-            Agregar Libro
-          </Button>
+        <Link href='/books/create'>
+          <Button className='ml-auto'>Agregar Libro</Button>
         </Link>
       </div>
-
-      <DataTable
-        columns={columns}
-        data={data}
-      />
+      <DataTable columns={columns} data={data} />
     </div>
   );
 }
