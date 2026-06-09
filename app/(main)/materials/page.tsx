@@ -1,5 +1,5 @@
 import { columns } from './columns';
-import { Material } from '@/types/material';
+import { Material } from '@/types/book';
 import { DataTable } from './data-table';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';

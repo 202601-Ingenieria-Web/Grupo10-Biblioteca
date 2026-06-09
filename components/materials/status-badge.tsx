@@ -1,8 +1,8 @@
 import { Badge } from "@/components/ui/badge";
-import type { Material } from "@/types/material";
+import type { Book } from "@/types/book";
 
 type Props = {
-  status: Material["status"];
+  status: Book["status"];
 };
 
 export function StatusBadge({ status }: Props) {

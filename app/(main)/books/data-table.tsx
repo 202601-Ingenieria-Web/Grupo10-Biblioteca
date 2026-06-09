@@ -1,5 +1,6 @@
 'use client';
-
+import { Book } from "@/types/book";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Table,
   TableBody,
@@ -8,89 +9,68 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-
+import { Checkbox } from '@/components/ui/checkbox';
+import { Pencil, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Pencil } from 'lucide-react';
 import Delete from '@/components/delete-dialog/Index';
+import { StatusBadge } from "@/components/materials/status-badge";
 
-interface DataTableProps {
+interface DataTableProps<TData, TValue> {
   columns: any;
-  data: any[];
+  data: Book[];
 }
 
-export function DataTable({
-  columns,
-  data,
-}: DataTableProps) {
+export function DataTable<Book, TValue>({ columns, data }: DataTableProps<Book, TValue>) {
   return (
     <div className='overflow-hidden rounded-md border'>
       <Table>
         <TableHeader>
           <TableRow>
             {columns.map((column: any) => (
-              <TableHead
-                key={column.accessorKey}
-                className='text-center'
-              >
+              <TableHead className='text-center' key={column.accessorKey}>
                 {column.header}
               </TableHead>
             ))}
-
-            <TableHead className='text-center'>
-              Acciones
-            </TableHead>
           </TableRow>
         </TableHeader>
-
         <TableBody>
           {data.length ? (
             data.map((row) => (
               <TableRow key={row.id}>
-                <TableCell className='text-center'>
-                  {row.id}
+                <TableCell className='justify-center items-center text-center'>
+                  <Avatar>
+                    <AvatarImage
+                      src={row.image || 'https://avatars.githubusercontent.com/u/9919?s=200&v=4'}
+                    />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
                 </TableCell>
-
-                <TableCell className='text-center'>
-                  {row.nombre}
+                <TableCell className='text-center'>{row.title}</TableCell>
+                <TableCell className='text-center'>{row.author}</TableCell>
+                <TableCell className='text-center'>{row.isbn}</TableCell>
+                <TableCell className='text-center'>{row.publicationYear}</TableCell>
+                <TableCell className='justify-center items-center text-center'>
+                  <div>
+                    <StatusBadge status={row.status} />
+                  </div>
                 </TableCell>
-
-                <TableCell className='text-center'>
-                  {row.saldo}
-                </TableCell>
-
-                <TableCell className='text-center'>
-                  {row.creadoPor?.name}
-                </TableCell>
-
-                <TableCell>
-                  <div className='flex justify-center gap-2'>
-                    <Button
-                      variant='outline'
-                      size='icon'
-                    >
-                      <Link
-                        href={`/maestros/create/${row.id}`}
-                      >
-                        <Pencil className='h-4 w-4' />
+                <TableCell className='justify-center items-center text-center'>
+                  <div className='flex flex-row gap-2 justify-center'>
+                    <Button variant='outline' size='icon'>
+                      <Link href={`/books/create/${row.id}`}>   // PILAS!!!!!!!!!!!!!!
+                        <Pencil />
                       </Link>
                     </Button>
-
-                    <Delete
-                      id={row.id}
-                      name={row.nombre}
-                    />
+                    <Delete id={row.id} name={row.title} />
                   </div>
                 </TableCell>
               </TableRow>
             ))
           ) : (
             <TableRow>
-              <TableCell
-                colSpan={5}
-                className='h-24 text-center'
-              >
-                No hay libros registrados.
+              <TableCell colSpan={columns.length} className='h-24 text-center'>
+                No results.
               </TableCell>
             </TableRow>
           )}

@@ -2,30 +2,21 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 
-export type Maestro = {
+export type Book = {
   id: string;
-  nombre: string;
-  saldo: number;
-  creadoPor: {
-    name: string;
-  };
+  title: string;
+  author: string;
+  isbn: string;
+  publicationYear: number;
+  status: "AVAILABLE" | "BORROWED" | "RESERVED" | "LOST" | "DAMAGED";
+  image?: string;
 };
 
-export const columns: ColumnDef<Maestro>[] = [
-  {
-    accessorKey: 'id',
-    header: 'ID',
-  },
-  {
-    accessorKey: 'nombre',
-    header: 'Título',
-  },
-  {
-    accessorKey: 'saldo',
-    header: 'Disponibles',
-  },
-  {
-    accessorKey: 'creadoPor.name',
-    header: 'Creado Por',
-  },
+export const columns: ColumnDef<Book>[] = [
+  {accessorKey: 'title', header: 'Título',},
+  {accessorKey: 'author', header: 'Autor',},
+  {accessorKey: 'isbn', header: 'ISBN',},
+  {accessorKey: 'publicationYear', header: 'Año de Publicación',},
+  {accessorKey: 'status', header: 'Estado',},
+  {accessorKey: 'image', header: 'Imagen',},
 ];
