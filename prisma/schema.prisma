@@ -18,8 +18,9 @@ enum Role {
 
 // ─── Enum de tipo de movimiento ───────────────────────────────
 enum MovementType {
-  ENTRADA
-  SALIDA
+  BORROW
+  RETURN
+  RESERVATION
 }
 
 // ─── Modelo de Usuario ────────────────────────────────────────
@@ -32,12 +33,12 @@ model User {
   createdAt DateTime @default(now())
 
   // Relaciones
-  maestrosCreados     Maestro[]    @relation("CreadorMaestro")
-  movimientosEjecutados Movement[] @relation("ResponsableMovimiento")
+  booksCreated Book[]     @relation("CreadorMaestro")
+  movements    Movement[] @relation("ResponsableMovimiento")
 }
 
-// ─── Modelo de Maestro (Libro / Material) ────────────────────
-model Maestro {
+// ─── Modelo de Libro / Material ──────────────────────────────
+model Book {
   id        String   @id @default(cuid())
   nombre    String
   saldo     Int      @default(0) // Saldo actual de inventario
@@ -48,7 +49,7 @@ model Maestro {
   creadoPor   User     @relation("CreadorMaestro", fields: [creadoPorId], references: [id])
 
   // Relaciones
-  movimientos Movement[]
+  movements Movement[]
 }
 
 // ─── Modelo de Movimiento / Transacción ──────────────────────
@@ -58,11 +59,12 @@ model Movement {
   tipo      MovementType // ENTRADA o SALIDA
   cantidad  Int          // Cantidad de elementos que salen o entran
 
-  // Relación con el Maestro al que pertenece
-  maestroId String
-  maestro   Maestro      @relation(fields: [maestroId], references: [id])
+  // Relación con el Libro al que pertenece
+  bookId   String
+  book     Book      @relation(fields: [bookId], references: [id])
 
   // Relación con el usuario en sesión responsable del movimiento
   responsableId String
   responsable   User     @relation("ResponsableMovimiento", fields: [responsableId], references: [id])
 }
+
