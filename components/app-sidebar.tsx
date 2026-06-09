@@ -36,8 +36,8 @@ const data = {
       icon: <HugeiconsIcon icon={DashboardSquare01Icon} strokeWidth={2} />,
     },
     {
-      title: "Materiales",
-      url: "/materials",
+      title: "Libros",
+      url: "/books",
       icon: <HugeiconsIcon icon={Book02Icon} strokeWidth={2} />, // Icono de libro
     },
     {

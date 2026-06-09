@@ -1,4 +1,5 @@
-import { columns, Movement } from './columns';
+import { columns} from './columns';
+import { Movement } from '@/types/movement';
 import { DataTable } from './data-table';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
